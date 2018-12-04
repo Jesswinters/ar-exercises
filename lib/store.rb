@@ -15,4 +15,14 @@ class Store < ActiveRecord::Base
       errors.add(:womens_apparel, "Must carry at least one apparel")
     end
   end
+
+  before_destroy :store_destroy_checker
+
+  private
+    def store_destroy_checker
+      unless employees.empty?
+        errors.add(:base, message: "Cannot delete store that has employees")
+        throw(:abort)
+      end
+    end
 end
