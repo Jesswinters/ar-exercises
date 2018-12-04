@@ -14,5 +14,9 @@ puts "----------"
 puts "Please enter a store name"
 store_name = gets.chomp
 
-s = Store.create(name: store_name)
-puts = s.errors.inspect
+store_name = Store.create(name: store_name)
+puts = store_name.errors.inspect
+
+store_name.errors.full_messages.each do |err|
+  puts err
+end
